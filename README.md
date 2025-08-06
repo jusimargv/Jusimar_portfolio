@@ -13,7 +13,7 @@ Este é um portfólio profissional desenvolvido em React, com foco em apresentar
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/jusimargv/seu-repo.git
+   git clone https://github.com/jusimargv/Jusimar_portfolio.git
    ```
 2. **Acesse a pasta do projeto:**
    ```bash

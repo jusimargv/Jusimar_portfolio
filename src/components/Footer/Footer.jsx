@@ -13,7 +13,7 @@ function Footer() {
                 {/* Seção de título e chamada para ação */}
                 <section className="flex flex-col justify-center items-start gap-2">
                     <h3 className="self-stretch text-center justify-start text-purple-400 text-xl font-normal font-['Inconsolata'] leading-normal">
-                        contato
+                        Contato
                     </h3>
                     <h2 className="self-stretch text-center justify-start text-zinc-200 text-2xl font-bold font-['Asap'] leading-7">
                         Gostou do meu trabalho?{' '}
