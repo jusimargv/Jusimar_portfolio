@@ -5,7 +5,7 @@ import bg from '@assets/bg.png'
 function Header() {
     return (
         // Container principal do header, ocupa toda a largura e altura mínima da tela
-        <header className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen p-6">
+        <header className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen">
             {/* Bloco de fundo com imagem e sombra */}
             <div
                 className="bg-cover bg-center min-h-screen self-stretch  mt-[-140px] relative flex flex-col items-center justify-center h-[920px]  shadow-2xl"

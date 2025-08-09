@@ -9,7 +9,7 @@ import noticias from '@assets/noticias.png'
 function Main() {
     return (
         // Container principal do conteúdo da página
-        <main className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen p-6">
+        <main className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen ">
             {/* Container central com títulos e grid de projetos */}
             <div className="self-stretch px-4 sm:px-10 md:px-20 lg:px-28 pb-4 flex flex-col justify-center h-auto items-center space-y-5 overflow-y-auto overscroll-y-auto sm:overflow-y-auto md:overflow-y-auto lg:overflow-y-auto">
                 {/* Títulos da seção de projetos */}

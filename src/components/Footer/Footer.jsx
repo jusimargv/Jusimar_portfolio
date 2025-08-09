@@ -4,7 +4,7 @@ import bg_footer from '@assets/bg_footer.png'
 function Footer() {
     return (
         // Elemento <footer> principal, define o rodapé ocupando toda a largura e altura mínima da tela, com padding e cor de fundo escura
-        <footer className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen p-6">
+        <footer className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen">
             <div
                 // Div principal do conteúdo do footer, com background image, padding e alinhamento centralizado
                 className="bg-cover bg-center min-h-screen self-stretch px-28 pt-32 pb-48 inline-flex flex-col justify-center items-center gap-12 overflow-hidden"
