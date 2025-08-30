@@ -145,7 +145,7 @@ function Footer() {
                 <img
                     src="./whatsapp.svg"
                     alt="WhatsApp"
-                    className="w-20 h-20 rounded-full hover:w-50 hover:h-50 transition duration-300 hover:shadow-xl "
+                    className="w-20 h-20 rounded-full hover:w-25 hover:h-25 transition duration-300 hover:shadow-xl "
                 />
             </a>
         </footer>
