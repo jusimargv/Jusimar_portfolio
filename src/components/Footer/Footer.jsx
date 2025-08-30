@@ -4,7 +4,7 @@ import bg_footer from '@assets/bg_footer.png'
 function Footer() {
     return (
         // Elemento <footer> principal, define o rodapé ocupando toda a largura e altura mínima da tela, com padding e cor de fundo escura
-        <footer className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen">
+        <footer className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen relative">
             <div
                 // Div principal do conteúdo do footer, com background image, padding e alinhamento centralizado
                 className="bg-cover bg-center min-h-screen self-stretch px-28 pt-32 pb-48 inline-flex flex-col justify-center items-center gap-12 overflow-hidden"
@@ -134,6 +134,20 @@ function Footer() {
             <p className='self-stretch text-center justify-start text-neutral-300 text-xl font-normal font-["Maven_Pro"] leading-snug'>
                 &copy; 2025 <span className='text-red-400'>Dev_Jusimar</span>. Todos os direitos reservados.
             </p>
+
+            {/* WhatsApp floating button */}
+            <a
+                href="https://wa.me/+5519989233452"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fixed bottom-8 right-8 p-4 shadow-lg transition-colors hover:right-10 hover:bottom-10 duration-300"
+            >
+                <img
+                    src="./whatsapp.svg"
+                    alt="WhatsApp"
+                    className="w-20 h-20 rounded-full hover:w-50 hover:h-50 transition duration-300 hover:shadow-xl "
+                />
+            </a>
         </footer>
     )
 }
