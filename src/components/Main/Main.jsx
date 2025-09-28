@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import tecblog from '@assets/tecblog.png'
 import unes from '@assets/unes.png'
 import museu from '@assets/museu.png'
@@ -5,291 +6,273 @@ import anna from '@assets/anna_bella.png'
 import chale from '@assets/chale_hotel.png'
 import noticias from '@assets/noticias.png'
 
-// Componente principal da página Main
-function Main() {
+const projects = [
+    {
+        id: 1,
+        title: 'Notícias Cidade',
+        image: noticias,
+        description: 'Site de notícias local com seções para manchetes, notícias recentes, destaques e colunas.',
+        preview: 'https://jusimargv.github.io/noticias-cidade/',
+        technologies: ['HTML', 'CSS']
+    },
+    {
+        id: 2,
+        title: 'TecBlog',
+        image: tecblog,
+        description: 'Plataforma dedicada à publicação de notícias, dicas e tutoriais do universo da tecnologia.',
+        preview: 'https://jusimargv.github.io/Site_TecBlog/',
+        technologies: ['HTML', 'CSS']
+    },
+    {
+        id: 3,
+        title: 'Anna Bella',
+        image: anna,
+        description: 'Site profissional para modelo, com galeria de fotos e informações sobre campanhas publicitárias.',
+        preview: 'https://jusimargv.github.io/Anna_Bella_Official/',
+        technologies: ['HTML', 'CSS']
+    },
+    {
+        id: 4,
+        title: 'Universidade Unes',
+        image: unes,
+        description: 'Portal universitário com informações sobre cursos, processo seletivo e vida acadêmica.',
+        preview: 'https://jusimargv.github.io/universidade/',
+        technologies: ['HTML', 'CSS']
+    },
+    {
+        id: 5,
+        title: 'Chalé Hotel',
+        image: chale,
+        description: 'Site para hotel com apresentação de acomodações, serviços e reservas.',
+        preview: 'https://jusimargv.github.io/chale_hotel/',
+        technologies: ['HTML', 'CSS']
+    },
+    {
+        id: 6,
+        title: 'Museu Nacional',
+        image: museu,
+        description: 'Portal do museu com exposições, eventos e informações históricas.',
+        preview: 'https://jusimargv.github.io/museu_nacional.github.io/',
+        technologies: ['HTML', 'CSS']
+    }
+]
+
+function ProjectCarousel() {
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [itemsPerPage, setItemsPerPage] = useState(3)
+
+    // Atualiza o número de itens por página baseado no tamanho da tela
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                setItemsPerPage(2)
+            } else {
+                setItemsPerPage(3)
+            }
+        }
+
+        handleResize() // Executa ao montar
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    const totalPages = Math.ceil(projects.length / itemsPerPage)
+
+    const nextSlide = () => {
+        setCurrentIndex((prevIndex) => 
+            prevIndex + itemsPerPage >= projects.length ? 0 : prevIndex + itemsPerPage
+        )
+    }
+
+    const prevSlide = () => {
+        setCurrentIndex((prevIndex) => 
+            prevIndex - itemsPerPage < 0 ? projects.length - itemsPerPage : prevIndex - itemsPerPage
+        )
+    }
+
+    const visibleProjects = projects.slice(currentIndex, currentIndex + itemsPerPage)
+
     return (
-        // Container principal do conteúdo da página
-        <main className="w-full bg-zinc-900 flex flex-col justify-end items-start min-h-screen ">
-            {/* Container central com títulos e grid de projetos */}
-            <div className="self-stretch px-4 sm:px-10 md:px-20 lg:px-28 pb-4 flex flex-col justify-center h-auto items-center space-y-5 overflow-y-auto overscroll-y-auto sm:overflow-y-auto md:overflow-y-auto lg:overflow-y-auto">
-                {/* Títulos da seção de projetos */}
-                <section className="w-full max-w-4xl mx-auto flex flex-col justify-start items-center space-y-3 px-4">
-                    <h1 className="w-full text-center text-red-400 text-xl sm:text-2xl font-normal font-['Inconsolata'] leading-normal">
-                        Meu trabalho
-                    </h1>
-                    <h2 className="w-full text-center text-zinc-200 text-2xl sm:text-3xl font-bold font-['Maven_Pro'] leading-snug">
-                        Veja os projetos em destaque
-                    </h2>
-                </section>
-                {/* Grid responsivo de cards de projetos */}
-                <section className="w-full max-w-5xl  flex flex-wrap justify-center items-start gap-6">
-                    {/* Card: Notícias Cidade */}
-                    <section className="w-full sm:w-80 h-83 p-2 bg-gray-800 rounded-xl flex flex-col justify-start items-center space-y-1 hover:border-indigo-500 hover:border transition duration-300">
-                        {/* Imagem do projeto */}
-                        <img
-                            className="w-full h-40 rounded-lg object-cover"
-                            src={noticias}
-                            alt="capa_cidade"
-                        />
-                        {/* Conteúdo textual do card */}
-                        <section className="self-stretch p-1 flex flex-col justify-start items-center gap-2 ">
-                            <h3 className="self-stretch justify-start text-zinc-200 text-base font-bold font-['Maven_Pro'] leading-tight">
-                                Notícias Cidade
-                            </h3>
-                            <p className="self-stretch justify-start text-neutral-300  text-sm md:text-sm font-normal font=['Maven_Pro'] leading-tight ">
-                                Desenvolvido para praticar e demonstrar
-                                habilidades em HTML e CSS. O site apresenta um
-                                layout simples e fixo, voltado apenas para fins
-                                de aprendizado, simulando um portal de notícias
-                                local com seções para manchetes, notícias
-                                recentes, destaques, colunas e informações de
-                                contato.
-                                {/* Botão de preview do projeto */}
-                                <a
-                                    href="https://jusimargv.github.io/noticias-cidade/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="ml-19 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-0.5 px-2 rounded transition duration-300 "
-                                >
-                                    Preview
-                                </a>
-                            </p>
-                        </section>
-                    </section>
-                    {/* Card: TecBlog */}
-                    <section className="w-full sm:w-80 h-83 p-2 bg-gray-800 rounded-xl  flex flex-col justify-start items-center space-y-1 hover:border-indigo-500 hover:border transition duration-300">
-                        {/* Imagem do projeto */}
-                        <img
-                            className="w-full h-40 rounded-lg object-cover"
-                            src={tecblog}
-                            alt=""
-                        />
-                        {/* Conteúdo textual do card */}
-                        <section className="self-stretch p-1 flex flex-col justify-start items-center gap-2  ">
-                            <h3 className="self-stretch justify-start text-zinc-200 text-base font-bold font-['Maven_Pro'] leading-tight">
-                                TecBlog
-                            </h3>
-                            <p className="self-stretch justify-start text-neutral-300  text-sm md:text-sm font-normal font=['Maven_Pro'] leading-tight ">
-                                O TecBlog é uma plataforma dedicada à publicação
-                                de notícias, dicas, tutoriais e novidades do
-                                universo da tecnologia. O objetivo é criar um
-                                espaço colaborativo para entusiastas, estudantes
-                                e profissionais compartilharem conhecimento e se
-                                manterem atualizados.
-                                {/* Botão de preview do projeto */}
-                                <a
-                                    href="https://jusimargv.github.io/Site_TecBlog/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="ml-38 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-0.5 px-2 rounded transition duration-300 "
-                                >
-                                    Preview
-                                </a>
-                            </p>
-                        </section>
-                    </section>
-                    {/* Card: Anna Bella */}
-                    <section className="w-full sm:w-80 h-83 p-2 bg-gray-800 rounded-xl flex flex-col justify-start items-center space-y-1 hover:border-indigo-500 hover:border transition duration-300">
-                        {/* Imagem do projeto */}
-                        <img
-                            className="w-full h-40 rounded-lg object-cover"
-                            src={anna}
-                            alt=""
-                        />
-                        {/* Conteúdo textual do card */}
-                        <section className="self-stretch p-1 flex flex-col justify-start items-center gap-2 ">
-                            <h3 className="self-stretch justify-start text-zinc-200 text-base font-bold font-['Maven_Pro'] leading-tight">
-                                Anna Bella
-                            </h3>
-                            <p className="self-stretch justify-start text-neutral-300  text-sm md:text-sm font-normal font=['Maven_Pro'] leading-tight ">
-                                Projeto Site portfólio desenvolvido para
-                                apresentar o trabalho, a carreira e os contatos
-                                profissionais da modelo Anna Bella. O objetivo é
-                                criar uma presença digital elegante, responsiva
-                                e de fácil navegação, destacando fotos,
-                                biografia, depoimentos e formas de contato.
-                                {/* Botão de preview do projeto */}
-                                <a
-                                    href="https://jusimargv.github.io/Anna_Bella_Official/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="ml-44 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-0.5 px-2 rounded transition duration-300 "
-                                >
-                                    Preview
-                                </a>
-                            </p>
-                        </section>
-                    </section>
-                    {/* Card: Universidade Unes */}
-                    <section className="w-full sm:w-80 h-83 p-2 bg-gray-800 rounded-xl flex flex-col justify-start items-center space-y-1 hover:border-indigo-500 hover:border transition duration-300">
-                        {/* Imagem do projeto */}
-                        <img
-                            className="w-full h-40 rounded-lg object-cover"
-                            src={unes}
-                            alt=""
-                        />
-                        {/* Conteúdo textual do card */}
-                        <section className="self-stretch p-1 flex flex-col justify-start items-center space-y-1 ">
-                            <h3 className="self-stretch justify-start text-zinc-200 text-base font-bold font-['Maven_Pro'] leading-tight">
-                                Universidade Unes
-                            </h3>
-                            <p className="self-stretch justify-start text-neutral-300  text-sm md:text-sm font-normal font=['Maven_Pro'] leading-tight ">
-                                Este projeto apresenta um layout responsivo para
-                                um site universidade, desenvolvido com HTML5 e
-                                CSS3. O design combina elementos modernos com
-                                uma estética rústica e acolhedora, perfeita para
-                                representar um estabelecimento hoteleiro que
-                                valoriza o conforto e a natureza.
-                                {/* Botão de preview do projeto */}
-                                <a
-                                    href="https://jusimargv.github.io/universidade/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="ml-23  inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-0.5 px-2 rounded transition duration-300 "
-                                >
-                                    Preview
-                                </a>
-                            </p>
-                        </section>
-                    </section>
-                    {/* Card: Chalé Hotel */}
-                    <section className="w-full sm:w-80 h-83 p-2 bg-gray-800 rounded-xl flex flex-col justify-start items-center space-y-1 hover:border-indigo-500 hover:border transition duration-300">
-                        {/* Imagem do projeto */}
-                        <img
-                            className="w-full h-40 rounded-lg object-cover"
-                            src={chale}
-                            alt=""
-                        />
-                        {/* Conteúdo textual do card */}
-                        <section className="self-stretch p-1 flex flex-col justify-start items-center gap-2 ">
-                            <h3 className="self-stretch justify-start text-zinc-200 text-base font-bold font-['Maven_Pro'] leading-tight">
-                                Chalé Hotel
-                            </h3>
-                            <p className="self-stretch justify-start text-neutral-300  text-sm md:text-sm font-normal font=['Maven_Pro'] leading-tight ">
-                                Este projeto apresenta um layout responsivo para
-                                um site de hotel chalé, desenvolvido com HTML5 e
-                                CSS3. O design combina elementos modernos com
-                                uma estética rústica e acolhedora, perfeita para
-                                representar um estabelecimento hoteleiro que
-                                valoriza o conforto e a natureza.
-                                {/* Botão de preview do projeto */}
-                                <a
-                                    href="https://jusimargv.github.io/chale-hotel/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="ml-22 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-0.5 px-2 rounded transition duration-300 "
-                                >
-                                    Preview
-                                </a>
-                            </p>
-                        </section>
-                    </section>
-                    {/* Card: Museu Nacional */}
-                    <section className="w-full sm:w-80 h-83 p-2 bg-gray-800 rounded-xl flex flex-col justify-start items-center space-y-1 hover:border-indigo-500 hover:border transition duration-300">
-                        {/* Imagem do projeto */}
-                        <img
-                            className="w-full h-40 rounded-lg object-cover"
-                            src={museu}
-                            alt=""
-                        />
-                        {/* Conteúdo textual do card */}
-                        <section className="self-stretch p-1 flex flex-col justify-start items-center gap-2 ">
-                            <h3 className="self-stretch justify-start text-zinc-200 text-base font-bold font-['Maven_Pro'] leading-tight">
-                                Museu Nacional
-                            </h3>
-                            <p className="self-stretch justify-start text-neutral-300  text-sm md:text-sm font-normal font=['Maven_Pro'] leading-tight ">
-                                Este projeto apresenta um layout responsivo para
-                                um site de hotel chalé, desenvolvido com HTML5 e
-                                CSS3. O design combina elementos modernos com
-                                uma estética rústica e acolhedora, perfeita para
-                                representar um estabelecimento hoteleiro que
-                                valoriza o conforto e a natureza.
-                                {/* Botão de preview do projeto */}
-                                <a
-                                    href="https://jusimargv.github.io/museu_nacional.github.io/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="ml-23 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-0.5 px-2 mb-1 rounded transition duration-300 "
-                                >
-                                    Preview
-                                </a>
-                            </p>
-                        </section>
-                    </section>
-                </section>
+        <div className="relative w-full">
+            <div className="flex justify-between items-center gap-4">
+                {/* Botão Anterior */}
+                <button 
+                    onClick={prevSlide}
+                    className="p-2 rounded-full bg-indigo-500 hover:bg-indigo-600 transition-colors"
+                >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+
+                {/* Container dos Projetos */}
+                <div className="flex-1 overflow-hidden">
+                    <div className="flex gap-4 transition-transform duration-500 ease-in-out">
+                        {visibleProjects.map((project) => (
+                            <div 
+                                key={project.id}
+                                className="flex-1 min-w-0"
+                            >
+                                <div className="bg-gray-800 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="p-6">
+                                        <h3 className="text-xl font-bold text-zinc-200 mb-2">{project.title}</h3>
+                                        <p className="text-zinc-400 text-sm mb-4">{project.description}</p>
+                                        <div className="flex flex-wrap gap-2 mb-4">
+                                            {project.technologies.map((tech) => (
+                                                <span 
+                                                    key={tech}
+                                                    className="px-2 py-1 bg-zinc-700 rounded-full text-xs text-zinc-300"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <a
+                                            href={project.preview}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-block w-full text-center bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+                                        >
+                                            Ver Preview
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Botão Próximo */}
+                <button 
+                    onClick={nextSlide}
+                    className="p-2 rounded-full bg-indigo-500 hover:bg-indigo-600 transition-colors"
+                >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
-            {/* Seção de serviços oferecidos */}
-            <div className="self-stretch px-28 pt-20 pb-28 bg-neutral-950 inline-flex flex-col justify-center items-center gap-14 overflow-hidden">
-                {/* Título e subtítulo dos serviços */}
-                <section className="flex flex-col justify-center items-start gap-2">
-                    <h4 className='self-stretch text-center justify-start text-red-400 text-xl font-normal font-["Inconsolata"] leading-normal'>
-                        Meus Serviços
-                    </h4>
-                    <span className="self-stretch text-center jusatify-start text-zinc-200 text-2xl font-bold">
-                        Como posso ajudar contribuir com seu time.
-                    </span>
-                </section>
-                {/* Grid de serviços */}
-                <div className="inline-flex justify-center items-start gap-6 flex-wrap content-start">
-                    {/* Card de serviço: Websites e Aplicativos */}
-                    <section className="w-72 p-5 rounded-xl  outline-2 outline-offset-[-2px] outline-zinc-900 inline-flex flex-col justify-center items-start gap-5 overflow-hidden  hover:bg-indigo-500 transition duration-300">
-                        <div className="w-12 h-12 relative overflow-hidden">
-                            <img
-                                className="w-11 h-8 left-[3px] top-[7.50px] absolute"
-                                src="./Devices.svg"
-                                alt="logo-devices"
-                            />
-                        </div>
-                        <div className="self-stretch flex flex-col justify-start items-center gap-2">
-                            <h4 className='self-stretch justify-start text-zinc-200 text-base font-bold font-["Asap"] leading-tight'>
-                                Websites e Aplicativos
-                            </h4>
-                            <span className='self-stretch justify-start text-neutral-300 text-sm font-normal font-["Maven_Pro"] leading-tight'>
-                                Desenvolvimento de interfaces
-                            </span>
-                        </div>
-                    </section>
-                    {/* Card de serviço: APIs e Banco de Dados */}
-                    <section className="w-72 p-5 rounded-xl  outline-2 outline-offset-[-2px] outline-zinc-900 inline-flex flex-col justify-center items-start gap-5 overflow-hidden  hover:bg-indigo-500 transition duration-300">
-                        <div className="w-12 h-12 relative overflow-hidden">
-                            <img
-                                className="w-11 h-8 left-[3px] top-[7.50px] absolute"
-                                src="./HardDrives.svg"
-                                alt="logo-HardDrives"
-                            />
-                        </div>
-                        <div className="self-stretch flex flex-col justify-start items-center gap-2">
-                            <h4 className='self-stretch justify-start text-zinc-200 text-base font-bold font-["Asap"] leading-tight'>
-                                APIs e Banco de Dados
-                            </h4>
-                            <span className='self-stretch justify-start text-neutral-300 text-sm font-normal font-["Maven_Pro"] leading-tight'>
-                                Analises de grandes volumes de dados{''}
-                            </span>
-                        </div>
-                    </section>
-                    {/* Card de serviço: AWS Cloud Practitioner */}
-                    <section className="w-72 p-5 rounded-xl  outline-2 outline-offset-[-2px] outline-zinc-900 inline-flex flex-col justify-center items-start gap-5 overflow-hidden hover:bg-indigo-500 transition duration-300">
-                        <div className="w-12 h-12 relative overflow-hidden">
-                            <img
-                                className="w-11 h-8 left-[3px] top-[7.50px] absolute"
-                                src="./Devices.svg"
-                                alt="logo-devices"
-                            />
-                        </div>
-                        <div className="self-stretch flex flex-col justify-start items-center gap-2">
-                            <h4 className='self-stretch justify-start text-zinc-200 text-base font-bold font-["Asap"] leading-tight'>
-                                AWS Cloud Practitioner
-                            </h4>
-                            <span className='self-stretch justify-start text-neutral-300 text-sm font-normal font-["Maven_Pro"] leading-tight'>
-                                Soluções em nuvem seguras.
-                            </span>
-                        </div>
-                    </section>
+
+            {/* Indicadores de página */}
+            <div className="flex justify-center gap-2 mt-4">
+                {Array.from({ length: totalPages }).map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setCurrentIndex(index * itemsPerPage)}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                            index === Math.floor(currentIndex / itemsPerPage)
+                                ? 'bg-indigo-500'
+                                : 'bg-zinc-600'
+                        }`}
+                    />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+const services = [
+    {
+        title: 'Websites e Aplicativos',
+        description: 'Desenvolvimento de interfaces modernas e responsivas',
+        icon: '/Devices.svg'
+    },
+    {
+        title: 'APIs e Banco de Dados',
+        description: 'Análise e gerenciamento de dados',
+        icon: '/HardDrives.svg'
+    },
+    {
+        title: 'AWS Cloud Practitioner',
+        description: 'Soluções em nuvem seguras',
+        icon: '/Code.svg'
+    }
+]
+
+function ProjectCard({ project }) {
+    return (
+        <article className="w-full sm:w-80 bg-gray-800 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20">
+            <div className="relative group">
+                <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                    <h3 className="text-xl font-bold text-zinc-200 mb-2">{project.title}</h3>
+                    <p className="text-zinc-400 text-sm">{project.description}</p>
+                    <a
+                        href={project.preview}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-block bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+                    >
+                        Ver Preview
+                    </a>
                 </div>
             </div>
+        </article>
+    )
+}
+
+function Main() {
+    return (
+        <main className="w-full bg-zinc-900">
+            {/* Seção de Projetos */}
+            <section id="projetos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">
+                        Projetos em Destaque
+                    </h2>
+                    <p className="mt-4 text-lg text-zinc-400">
+                        Conheça alguns dos meus trabalhos mais recentes
+                    </p>
+                </div>
+                
+                <ProjectCarousel />
+            </section>
+
+            {/* Seção de Serviços (ou Contato) */}
+            <section id="servicos" className="bg-zinc-800 py-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">
+                            Meus Serviços
+                        </h2>
+                        <p className="mt-4 text-lg text-zinc-400">
+                            Como posso ajudar a impulsionar seu projeto
+                        </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {services.map((service) => (
+                            <div 
+                                key={service.title}
+                                className="p-6 bg-zinc-900 rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20"
+                            >
+                                <img 
+                                    src={service.icon} 
+                                    alt={service.title}
+                                    className="w-12 h-12 mb-4"
+                                />
+                                <h3 className="text-xl font-bold text-zinc-200 mb-2">
+                                    {service.title}
+                                </h3>
+                                <p className="text-zinc-400">
+                                    {service.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
         </main>
     )
 }
 
-// Exporta o componente Main para uso em outros arquivos
 export default Main

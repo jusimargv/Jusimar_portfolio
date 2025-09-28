@@ -1,3 +1,116 @@
-@import 'tailwindcss';
-@import 'tailwindcss/preflight' base;
-@import 'tailwindcss/utilities' utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-zinc-900 text-zinc-100;
+        font-family: 'Maven Pro', sans-serif;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-full text-white font-semibold transition-all duration-300 hover:scale-105;
+    }
+
+    .btn-secondary {
+        @apply px-6 py-3 border-2 border-indigo-500 hover:bg-indigo-500/10 rounded-full text-white font-semibold transition-all duration-300;
+    }
+
+    .card {
+        @apply bg-gray-800 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20;
+    }
+}
+
+@layer utilities {
+    .text-gradient {
+        @apply text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500;
+    }
+}
+
+/* Animações personalizadas */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Classes de utilidade personalizadas */
+@layer utilities {
+    .animate-fadeIn {
+        animation: fadeIn 0.8s ease-out;
+    }
+    
+    .animate-slideIn {
+        animation: slideIn 0.5s ease-out;
+    }
+    
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .hover-scale {
+        @apply transition-transform duration-300 hover:scale-105;
+    }
+    
+    .card-shadow {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+}
+
+/* Estilos globais */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-zinc-900 text-zinc-100;
+    font-family: 'Maven Pro', sans-serif;
+}
+
+/* Melhorias de acessibilidade */
+:focus {
+    @apply outline-2 outline-indigo-500;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-zinc-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-indigo-500 rounded-full;
+}
+
+/* Melhorias de responsividade */
+@media (max-width: 640px) {
+    .container {
+        @apply px-4;
+    }
+}
