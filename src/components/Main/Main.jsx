@@ -65,9 +65,9 @@ function ProjectCarousel() {
     useEffect(() => {
         function handleResize() {
             if (window.innerWidth < 768) {
-                setItemsPerPage(2)
+                setItemsPerPage(1) // Apenas 1 item por página no mobile (um embaixo do outro)
             } else {
-                setItemsPerPage(3)
+                setItemsPerPage(3) // 3 itens por página no desktop
             }
         }
 
@@ -107,11 +107,11 @@ function ProjectCarousel() {
 
                 {/* Container dos Projetos */}
                 <div className="flex-1 overflow-hidden">
-                    <div className="flex gap-4 transition-transform duration-500 ease-in-out">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 transition-all duration-300 ease-in-out">
                         {visibleProjects.map((project) => (
                             <div 
                                 key={project.id}
-                                className="flex-1 min-w-0"
+                                className="w-full"
                             >
                                 <div className="bg-gray-800 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20">
                                     <img
