@@ -188,7 +188,7 @@ const services = [
         icon: '/HardDrives.svg'
     },
     {
-        title: 'AWS Cloud Practitioner',
+        title: 'AWS Cloud Services',
         description: 'Soluções em nuvem seguras',
         icon: '/Code.svg'
     }

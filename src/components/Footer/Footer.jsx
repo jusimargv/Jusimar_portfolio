@@ -23,9 +23,9 @@ function Footer() {
                     </span>
                 </section>
                 {/* Seção de links sociais e contato */}
-                <section className="flex flex-col justify-start items-start gap-4">
+                <section className="flex flex-col justify-start items-center gap-4 w-full">
                     {/* Linkedin */}
-                    <section className="w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
+                    <section className="w-full max-w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
                         <div className="w-7 h-7 relative overflow-hidden">
                             {/* Ícone do Linkedin */}
                             <img
@@ -51,7 +51,7 @@ function Footer() {
                         </a>
                     </section>
                     {/* Instagram */}
-                    <section className="w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
+                    <section className="w-full max-w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
                         <div className="w-7 h-7 relative overflow-hidden">
                             {/* Ícone do Instagram */}
                             <img
@@ -77,7 +77,7 @@ function Footer() {
                         </a>
                     </section>
                     {/* Github */}
-                    <section className="w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
+                    <section className="w-full max-w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
                         <div className="w-7 h-7 relative overflow-hidden">
                             {/* Ícone do Github */}
                             <img
@@ -103,7 +103,7 @@ function Footer() {
                         </a>
                     </section>
                     {/* E-mail */}
-                    <section className="w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
+                    <section className="w-full max-w-96 p-5 bg-gray-800 rounded-lg inline-flex justify-center items-center gap-3 overflow-hidden">
                         <div className="w-7 h-7 relative overflow-hidden">
                             {/* Ícone de envelope para e-mail */}
                             <img
